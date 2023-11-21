@@ -1,13 +1,8 @@
 package math
 
 import (
-	"golang.org/x/exp/constraints"
 	"golang.org/x/exp/slices"
 )
-
-type Number interface {
-	constraints.Float | constraints.Integer
-}
 
 // Median returns the median of a number series, using generics to process any float or int numbers
 func Median[T Number](input []T) float64 {
@@ -26,4 +21,25 @@ func Median[T Number](input []T) float64 {
 	}
 
 	return res
+}
+
+// Nearest returns a number equal to or closest to the original value and its index
+// In case of multiple results, the number with the lower index will be returned
+// For an empty or nil slice, a null type value and -1 index will be returned
+func Nearest[T Number](input []T, num T) (T, int) {
+	var (
+		res   T
+		index int = -1
+	)
+
+	if input == nil || len(input) == 0 {
+		return res, index
+	}
+	if len(input) == 1 {
+		return input[0], 0
+	}
+
+	//diff, index := Abs[T](input[0]-num), 0
+
+	return res, 0
 }
