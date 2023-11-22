@@ -35,3 +35,15 @@ func Max[T Number](nums ...T) T {
 	}
 	return max
 }
+
+// Constrain constraints num to a given range
+func Constrain[T Number](num, min, max T) T {
+	switch {
+	case num < min:
+		return min
+	case num > max:
+		return max
+	default:
+		return num
+	}
+}
