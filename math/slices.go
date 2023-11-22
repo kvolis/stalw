@@ -43,7 +43,7 @@ func Nearest[T Number](input []T, num T) (T, int) {
 	i, index := 1, 0
 
 	for ; i < len(input); i++ {
-		if d := Max[T](input[0], num) - Min[T](input[0], num); d < diff {
+		if d := Max[T](input[i], num) - Min[T](input[i], num); d < diff {
 			diff = d
 			index = i
 		}
