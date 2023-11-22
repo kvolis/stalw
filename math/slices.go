@@ -49,5 +49,5 @@ func Nearest[T Number](input []T, num T) (T, int) {
 		}
 	}
 
-	return input[i], i
+	return input[index], index
 }
