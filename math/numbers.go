@@ -16,22 +16,22 @@ func Abs[T Number](num T) T {
 
 // Min returns the minimum number of a series
 func Min[T Number](nums ...T) T {
-	var min *T
+	min := nums[0]
 	for _, num := range nums {
-		if min == nil || num < *min {
-			min = &num
+		if num < min {
+			min = num
 		}
 	}
-	return *min
+	return min
 }
 
 // Max returns the maximum number of a series
 func Max[T Number](nums ...T) T {
-	var max *T
+	max := nums[0]
 	for _, num := range nums {
-		if max == nil || num > *max {
-			max = &num
+		if num > max {
+			max = num
 		}
 	}
-	return *max
+	return max
 }
