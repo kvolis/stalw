@@ -32,14 +32,22 @@ func Nearest[T Number](input []T, num T) (T, int) {
 		index int = -1
 	)
 
-	if input == nil || len(input) == 0 {
+	if len(input) == 0 {
 		return res, index
 	}
 	if len(input) == 1 {
 		return input[0], 0
 	}
 
-	//diff, index := Abs[T](input[0]-num), 0
+	diff := Max[T](input[0], num) - Min[T](input[0], num)
+	i, index := 1, 0
 
-	return res, 0
+	for ; i < len(input); i++ {
+		if d := Max[T](input[0], num) - Min[T](input[0], num); d < diff {
+			diff = d
+			index = i
+		}
+	}
+
+	return input[i], i
 }

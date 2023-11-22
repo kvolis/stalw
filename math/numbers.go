@@ -14,17 +14,6 @@ func Abs[T Number](num T) T {
 	return -num
 }
 
-// Max returns the maximum number of a series
-func Max[T Number](nums ...T) T {
-	var max *T
-	for _, num := range nums {
-		if max == nil || num > *max {
-			max = &num
-		}
-	}
-	return *max
-}
-
 // Min returns the minimum number of a series
 func Min[T Number](nums ...T) T {
 	var min *T
@@ -34,4 +23,15 @@ func Min[T Number](nums ...T) T {
 		}
 	}
 	return *min
+}
+
+// Max returns the maximum number of a series
+func Max[T Number](nums ...T) T {
+	var max *T
+	for _, num := range nums {
+		if max == nil || num > *max {
+			max = &num
+		}
+	}
+	return *max
 }
