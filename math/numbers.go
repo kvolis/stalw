@@ -56,3 +56,11 @@ func Map[T Number](num, fromStart, fromEnd, toStart, toEnd T) float64 {
 	newVal := float64(toEnd) - relative*(float64(toEnd)-float64(toStart))
 	return newVal
 }
+
+// LinearXY returns the value of a function that is specified linearly by its argument.
+//
+// In other words, it returns the Y-coordinate of a point with an X-coordinate
+// that lies on a line defined by a segment with points (x1, y1) and (x2, y2).
+func LinearXY[T Number](x, x1, y1, x2, y2 T) float64 {
+	return Map[T](x, x1, x2, y1, y2)
+}
