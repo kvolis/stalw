@@ -47,3 +47,12 @@ func Constrain[T Number](num, min, max T) T {
 		return num
 	}
 }
+
+// Map proportionally recalculates and returns a number from one range to another.
+// If in one of the ranges its boundaries are inverted relative to another range, this will be taken into account.
+// For example, Map(6, 0, 10, 0, 20) = 12, but Map(6, 0, 10, 20, 0) = 8
+func Map[T Number](num, fromStart, fromEnd, toStart, toEnd T) float64 {
+	relative := (float64(fromEnd) - float64(num)) / (float64(fromEnd) - float64(fromStart))
+	newVal := float64(toEnd) - relative*(float64(toEnd)-float64(toStart))
+	return newVal
+}
