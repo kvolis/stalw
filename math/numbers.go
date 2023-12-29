@@ -1,6 +1,10 @@
 package math
 
-import "golang.org/x/exp/constraints"
+import (
+	"sort"
+
+	"golang.org/x/exp/constraints"
+)
 
 type Number interface {
 	constraints.Float | constraints.Integer
@@ -58,9 +62,35 @@ func Map[T Number](num, fromStart, fromEnd, toStart, toEnd T) float64 {
 }
 
 // LinearXY returns the value of a function that is specified linearly by its argument.
-//
 // In other words, it returns the Y-coordinate of a point with an X-coordinate
 // that lies on a line defined by a segment with points (x1, y1) and (x2, y2).
 func LinearXY[T Number](x, x1, y1, x2, y2 T) float64 {
 	return Map[T](x, x1, x2, y1, y2)
+}
+
+// MostFrequent returns a list of the single most frequently occurring number,
+// or a sorted list of such numbers if the number of occurrences matches.
+// If input len equal zero, returns nil.
+func MostFrequent[T Number](nums []T) []T {
+	if len(nums) == 0 {
+		return nil
+	}
+
+	maxCnt := 0
+	stats := make(map[T]int)
+	for _, num := range nums {
+		stats[num]++
+		if n := stats[num]; n > maxCnt {
+			maxCnt = n
+		}
+	}
+
+	res := []T{}
+	for num, cnt := range stats {
+		if cnt == maxCnt {
+			res = append(res, num)
+		}
+	}
+	sort.Slice(res, func(i, j int) bool { return res[i] < res[j] })
+	return res
 }
