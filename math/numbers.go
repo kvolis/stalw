@@ -94,3 +94,14 @@ func MostFrequent[T Number](nums []T) []T {
 	sort.Slice(res, func(i, j int) bool { return res[i] < res[j] })
 	return res
 }
+
+// Count returns a count of occurrences of a number in a list of numbers
+func Count[T Number](num T, nums []T) int {
+	cnt := 0
+	for _, n := range nums {
+		if n == num {
+			cnt++
+		}
+	}
+	return cnt
+}
