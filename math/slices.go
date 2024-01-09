@@ -1,8 +1,32 @@
 package math
 
 import (
+	"sort"
+
 	"golang.org/x/exp/slices"
 )
+
+// Min returns the minimum number of a series
+func Min[T Number](nums ...T) T {
+	min := nums[0]
+	for _, num := range nums {
+		if num < min {
+			min = num
+		}
+	}
+	return min
+}
+
+// Max returns the maximum number of a series
+func Max[T Number](nums ...T) T {
+	max := nums[0]
+	for _, num := range nums {
+		if num > max {
+			max = num
+		}
+	}
+	return max
+}
 
 // Median returns the median of a number series, using generics to process any float or int numbers
 func Median[T Number](input []T) float64 {
@@ -51,4 +75,47 @@ func Nearest[T Number](input []T, num T) (T, int) {
 	}
 
 	return input[index], index
+}
+
+// MostFrequent returns a list of the single most frequently occurring number,
+// or a sorted list of such numbers if the number of occurrences matches.
+// If input len equal zero, returns nil.
+func MostFrequent[T Number](nums []T) []T {
+	ln := len(nums)
+	if ln == 0 {
+		return nil
+	}
+
+	maxCnt := 0
+	stats := make(map[T]int)
+
+	for _, num := range nums {
+		stats[num]++
+		if n := stats[num]; n > maxCnt {
+			maxCnt = n
+			if maxCnt > ln/2 {
+				break
+			}
+		}
+	}
+
+	res := []T{}
+	for num, cnt := range stats {
+		if cnt == maxCnt {
+			res = append(res, num)
+		}
+	}
+	sort.Slice(res, func(i, j int) bool { return res[i] < res[j] })
+	return res
+}
+
+// Count returns a count of occurrences of a number in a list of numbers
+func Count[T Number](num T, nums []T) int {
+	cnt := 0
+	for _, n := range nums {
+		if n == num {
+			cnt++
+		}
+	}
+	return cnt
 }
