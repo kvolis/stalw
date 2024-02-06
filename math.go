@@ -161,3 +161,11 @@ func Count[T Number](num T, nums []T) int {
 	}
 	return cnt
 }
+
+func Round(num float64, digits int) float64 {
+	return 0
+}
+
+func RoundMultiply[T Number](num T, multi T) T {
+	return 0
+}
