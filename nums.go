@@ -164,15 +164,26 @@ func Count[T Number](num T, nums []T) int {
 }
 
 // Round rounds the number to the specified digits count after the period
-func Round(number float64, digits int) float64 {
+func Round(num float64, digits int) float64 {
 	precision := 1.0
 	for digits > 0 {
 		precision *= 10
 		digits--
 	}
-	return math.Round(number*precision) / precision
+	return math.Round(num*precision) / precision
 }
 
-func RoundMultiply[T Number](num T, multi T) T {
-	return 0
+// RoundMultiple rounds the number to a multiple of another number
+func RoundMultiple[T Number](num T, multi T) T {
+	if multi == 0 {
+		return num
+	}
+
+	mf := float64(multi)
+	quot := float64(num) / mf
+	qRound := math.Round(quot)
+	nRound := qRound * mf
+	res := T(nRound)
+
+	return res
 }
