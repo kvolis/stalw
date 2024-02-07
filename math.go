@@ -1,6 +1,7 @@
 package stalw
 
 import (
+	"math"
 	"sort"
 
 	"golang.org/x/exp/constraints"
@@ -9,6 +10,28 @@ import (
 
 type Number interface {
 	constraints.Float | constraints.Integer
+}
+
+// Min returns the minimum number of a series
+func Min[T Number](nums ...T) T {
+	min := nums[0]
+	for _, num := range nums {
+		if num < min {
+			min = num
+		}
+	}
+	return min
+}
+
+// Max returns the maximum number of a series
+func Max[T Number](nums ...T) T {
+	max := nums[0]
+	for _, num := range nums {
+		if num > max {
+			max = num
+		}
+	}
+	return max
 }
 
 // Abs returns the absolute value of num
@@ -47,28 +70,6 @@ func LinearXY[T Number](x, x1, y1, x2, y2 T) float64 {
 	return Map[T](x, x1, x2, y1, y2)
 }
 
-// Min returns the minimum number of a series
-func Min[T Number](nums ...T) T {
-	min := nums[0]
-	for _, num := range nums {
-		if num < min {
-			min = num
-		}
-	}
-	return min
-}
-
-// Max returns the maximum number of a series
-func Max[T Number](nums ...T) T {
-	max := nums[0]
-	for _, num := range nums {
-		if num > max {
-			max = num
-		}
-	}
-	return max
-}
-
 // Median returns the median of a number series,
 // using generics to process any float or int numbers
 func Median[T Number](input []T) float64 {
@@ -89,8 +90,8 @@ func Median[T Number](input []T) float64 {
 	return res
 }
 
-// Nearest returns a number equal to or closest to the original value and its index
-// In case of multiple results, the number with the lower index will be returned
+// Nearest returns a number equal to or closest to the original value and its index.
+// In case of multiple results, the number with the lower index will be returned.
 // For an empty or nil slice, a null type value and -1 index will be returned
 func Nearest[T Number](input []T, num T) (T, int) {
 	var (
@@ -121,7 +122,7 @@ func Nearest[T Number](input []T, num T) (T, int) {
 
 // MostFrequent returns a list of the single most frequently occurring number,
 // or a sorted list of such numbers if the number of occurrences matches.
-// If input len equal zero, returns nil.
+// If input len equal zero, returns nil
 func MostFrequent[T Number](nums []T) []T {
 	ln := len(nums)
 	if ln == 0 {
@@ -162,8 +163,14 @@ func Count[T Number](num T, nums []T) int {
 	return cnt
 }
 
-func Round(num float64, digits int) float64 {
-	return 0
+// Round rounds the number to the specified digits count after the period
+func Round(number float64, digits int) float64 {
+	precision := 1.0
+	for digits > 0 {
+		precision *= 10
+		digits--
+	}
+	return math.Round(number*precision) / precision
 }
 
 func RoundMultiply[T Number](num T, multi T) T {
