@@ -152,17 +152,6 @@ func MostFrequent[T Number](nums []T) []T {
 	return res
 }
 
-// Count returns a count of occurrences of a number in a list of numbers
-func Count[T Number](num T, nums []T) int {
-	cnt := 0
-	for _, n := range nums {
-		if n == num {
-			cnt++
-		}
-	}
-	return cnt
-}
-
 // Round rounds the number to the specified digits count after the period
 func Round(num float64, digits int) float64 {
 	precision := 1.0
