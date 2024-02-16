@@ -70,6 +70,19 @@ func LinearXY[T Number](x, x1, y1, x2, y2 T) float64 {
 	return Map[T](x, x1, x2, y1, y2)
 }
 
+// Mean returns the average of a list of numbers.
+// Note that if the numbers in the list are too large,
+// the result may be incorrect due to the sum being overflowed.
+func Mean[T Number](nums []T) float64 {
+	var sum T
+	for _, num := range nums {
+		sum += num
+	}
+
+	res := float64(sum) / float64(len(nums))
+	return res
+}
+
 // Median returns the median of a number series,
 // using generics to process any float or int numbers
 func Median[T Number](input []T) float64 {
