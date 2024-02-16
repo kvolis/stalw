@@ -133,10 +133,10 @@ func Nearest[T Number](input []T, num T) (T, int) {
 	return input[index], index
 }
 
-// MostFrequent returns a list of the single most frequently occurring number,
+// MostFrequentsNums returns a list of the single most frequently occurring number,
 // or a sorted list of such numbers if the number of occurrences matches.
 // If input len equal zero, returns nil
-func MostFrequent[T Number](nums []T) []T {
+func MostFrequentsNums[T Number](nums []T) []T {
 	ln := len(nums)
 	if ln == 0 {
 		return nil
