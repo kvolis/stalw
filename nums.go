@@ -219,13 +219,13 @@ func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 		start, end, di = end, start, -1
 	}
 
-	max, ind := element(start), start
+	max, idx := element(start), start
 	for i := start; (iterate == Forward && i <= end) || (iterate == Backward && i >= end); i = i + di {
 		if elem := element(i); elem > max {
-			max, ind = elem, i
+			max, idx = elem, i
 		}
 	}
-	return max, ind
+	return max, idx
 }
 
 // MinBy returns the minimum element and its index from a set of objects of an arbitrary type,
@@ -242,11 +242,11 @@ func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 		start, end, di = end, start, -1
 	}
 
-	min, ind := element(start), start
+	min, idx := element(start), start
 	for i := start; (iterate == Forward && i <= end) || (iterate == Backward && i >= end); i = i + di {
 		if elem := element(i); elem < min {
-			min, ind = elem, i
+			min, idx = elem, i
 		}
 	}
-	return min, ind
+	return min, idx
 }
