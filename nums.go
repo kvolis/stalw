@@ -14,6 +14,10 @@ type Number interface {
 
 // Min returns the minimum number of a series
 func Min[T Number](nums ...T) T {
+	if nums == nil {
+		return 0
+	}
+
 	min := nums[0]
 	for _, num := range nums {
 		if num < min {
@@ -25,6 +29,10 @@ func Min[T Number](nums ...T) T {
 
 // Max returns the maximum number of a series
 func Max[T Number](nums ...T) T {
+	if nums == nil {
+		return 0
+	}
+
 	max := nums[0]
 	for _, num := range nums {
 		if num > max {
