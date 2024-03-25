@@ -242,11 +242,11 @@ func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 		start, end, di = end, start, -1
 	}
 
-	max, ind := element(start), start
+	min, ind := element(start), start
 	for i := start; (iterate == Forward && i <= end) || (iterate == Backward && i >= end); i = i + di {
-		if elem := element(i); elem < max {
-			max, ind = elem, i
+		if elem := element(i); elem < min {
+			min, ind = elem, i
 		}
 	}
-	return max, ind
+	return min, ind
 }
