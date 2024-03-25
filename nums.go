@@ -209,9 +209,9 @@ const (
 // for comparison of which the function of returning the values of such elements is used.
 // Uses the iteration direction (Forward or Backward) to return the
 // first element encountered if there are multiple equal elements.
-func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction) (N, int) {
+func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction) (A, int) {
 	if len(input) < 1 {
-		return 0, -1
+		return *new(A), -1
 	}
 
 	start, end, di := 0, len(input)-1, 1
@@ -225,16 +225,16 @@ func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 			max, idx = elem, i
 		}
 	}
-	return max, idx
+	return input[idx], idx
 }
 
 // MinBy returns the minimum element and its index from a set of objects of an arbitrary type,
 // for comparison of which the function of returning the values of such elements is used.
 // Uses the iteration direction (Forward or Backward) to return the
 // first element encountered if there are multiple equal elements.
-func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction) (N, int) {
+func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction) (A, int) {
 	if len(input) < 1 {
-		return 0, -1
+		return *new(A), -1
 	}
 
 	start, end, di := 0, len(input)-1, 1
@@ -248,5 +248,5 @@ func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 			min, idx = elem, i
 		}
 	}
-	return min, idx
+	return input[idx], idx
 }
