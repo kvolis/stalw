@@ -113,7 +113,7 @@ func Median[T Number](input []T) float64 {
 
 // Nearest returns a number equal to or closest to the original value and its index.
 // In case of multiple results, the number with the lower index will be returned.
-// For an empty or nil slice, a null type value and -1 index will be returned
+// For an empty or nil slice, a null type value and -1 index will be returned.
 func Nearest[T Number](input []T, num T) (T, int) {
 	var (
 		res   T
@@ -143,7 +143,7 @@ func Nearest[T Number](input []T, num T) (T, int) {
 
 // MostFrequentNums returns a list of the single most frequently occurring number,
 // or a sorted list of such numbers if the number of occurrences matches.
-// If input len equal zero, returns nil
+// If input len equal zero, returns nil.
 func MostFrequentNums[T Number](nums []T) []T {
 	ln := len(nums)
 	if ln == 0 {
@@ -209,6 +209,7 @@ const (
 // for comparison of which the function of returning the values of such elements is used.
 // Uses the iteration direction (Forward or Backward) to return the
 // first element encountered if there are multiple equal elements.
+// For an empty or nil slice, a null type value and -1 index will be returned.
 func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction) (A, int) {
 	if len(input) < 1 {
 		return *new(A), -1
@@ -232,6 +233,7 @@ func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction)
 // for comparison of which the function of returning the values of such elements is used.
 // Uses the iteration direction (Forward or Backward) to return the
 // first element encountered if there are multiple equal elements.
+// For an empty or nil slice, a null type value and -1 index will be returned.
 func MinBy[A any, N Number](input []A, element func(i int) N, iterate direction) (A, int) {
 	if len(input) < 1 {
 		return *new(A), -1
