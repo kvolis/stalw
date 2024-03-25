@@ -14,7 +14,7 @@ type Number interface {
 
 // Min returns the minimum number of a series
 func Min[T Number](nums ...T) T {
-	if nums == nil {
+	if len(nums) < 1 {
 		return 0
 	}
 
@@ -29,7 +29,7 @@ func Min[T Number](nums ...T) T {
 
 // Max returns the maximum number of a series
 func Max[T Number](nums ...T) T {
-	if nums == nil {
+	if len(nums) < 1 {
 		return 0
 	}
 
@@ -196,4 +196,34 @@ func RoundMultiple[T Number](num T, multi T) T {
 	res := T(nRound)
 
 	return res
+}
+
+type direction uint8
+
+const (
+	Forward direction = iota
+	Backward
+)
+
+// MaxBy returns the maximum element and its index from a set of objects of an arbitrary type,
+// for comparison of which the function of returning the values of such elements is used.
+// Uses the iteration direction (Forward or Backward) to return the
+// first element encountered if there are multiple equal elements.
+func MaxBy[A any, N Number](input []A, element func(i int) N, iterate direction) (N, int) {
+	if len(input) < 1 {
+		return 0, -1
+	}
+
+	start, end, di := 0, len(input)-1, 1
+	if iterate == Backward {
+		start, end, di = end, start, -1
+	}
+
+	max, ind := element(start), start
+	for i := start; (iterate == Forward && i <= end) || (iterate == Backward && i >= end); i = i + di {
+		if elem := element(i); elem > max {
+			max, ind = elem, i
+		}
+	}
+	return max, ind
 }
