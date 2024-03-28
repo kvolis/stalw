@@ -41,3 +41,18 @@ func MostFrequent[T comparable](elements []T) []T {
 	}
 	return res
 }
+
+// FitTo returns the result outputW and outputH of scaling the
+// specified inputW and inputH into the target targetW and targetH.
+// In other words, this is the result of fitting in
+// such a way as not to go beyond the target boundaries.
+func FitTo[T Number](inputW, inputH, targetW, targetH T) (outputW, outputH T) {
+	wScale := float64(targetW) / float64(inputW)
+	hScale := float64(targetH) / float64(inputH)
+
+	scale := Min(wScale, hScale)
+
+	outputW = T(float64(inputW) * scale)
+	outputH = T(float64(inputH) * scale)
+	return
+}
